@@ -19,7 +19,7 @@ from pruning_helper_functions_conv import *
 
 
 def factor_pruning(keras_model, prun_factor_dense=10, prun_factor_conv=10,
-                metric='L1', comp=None, num_classes=None, label_one_hot=None):
+                metric='L1', comp=None, num_classes=None, label_one_hot=None, custom_objects = None):
     """
     A given keras model get pruned. The factor for dense and conv says how
     many percent of the dense and conv layers should be deleted.
@@ -76,7 +76,7 @@ def factor_pruning(keras_model, prun_factor_dense=10, prun_factor_conv=10,
     print("Finish with pruning")
 
     pruned_model = build_pruned_model(model, layer_params, layer_types,
-                                      num_new_neurons, num_new_filters, comp)
+                                      num_new_neurons, num_new_filters, comp, custom_objects)
 
     print("Model built")
 
