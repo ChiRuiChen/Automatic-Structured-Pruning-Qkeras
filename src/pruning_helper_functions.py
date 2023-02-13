@@ -178,7 +178,7 @@ def model_pruning(layer_types, layer_params, layer_output_shape, layer_bias,
 
 
 def build_pruned_model(model, new_model_param, layer_types, num_new_neurons,
-                       num_new_filters, comp):
+                       num_new_filters, comp, custom_objects):
     """
     The new number of neurons and filters are changed in the model config.
     Load the new weight matrices into the model.
@@ -237,9 +237,9 @@ def build_pruned_model(model, new_model_param, layer_types, num_new_neurons,
     model.summary()
 
     if "Sequential" in str(model):
-        pruned_model = Sequential.from_config(model_config)
+        pruned_model = Sequential.from_config(model_config, custom_objects)
     elif "Functional" in str(model):
-        pruned_model = Model.from_config(model_config)
+        pruned_model = Model.from_config(model_config, custom_objects)
 
     print("After pruning:")
     pruned_model.summary()
